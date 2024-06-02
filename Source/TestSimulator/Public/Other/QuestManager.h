@@ -21,7 +21,7 @@ class TESTSIMULATOR_API UQuestManager : public UObject
 
     const FQuestData& GetCurrentQuest() const
     {
-        return CurrentQuest;
+        return *CurrentQuest;
     }
 
     const uint8& GetMistakes() const
@@ -36,8 +36,8 @@ class TESTSIMULATOR_API UQuestManager : public UObject
     TArray<FQuestData> QuestsData;
 
   private:
-    FQuestData CurrentQuest;
-    uint8 Mistakes = 0;
+    FQuestData* CurrentQuest = nullptr;
+    uint8 Mistakes           = 0;
     TWeakObjectPtr<class USimulatorGameInstance> GameInstance;
 
     void SetQuestText();

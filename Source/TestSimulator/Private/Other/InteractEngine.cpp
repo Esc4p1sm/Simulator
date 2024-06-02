@@ -84,10 +84,14 @@ void AInteractEngine::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCom
 {
     if (OtherActor->IsA<ABasePlayer>())
     {
-        //GameInstance->OnQuestComplite.Broadcast(EQuestStage::BrokenEngine);
-        GameInstance->GetQuestManager()->MarkQuestDone(EQuestStage::BrokenEngine);
+        const auto QuestManager = GameInstance->GetQuestManager();
 
-        TriggerSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        if (QuestManager)
+        {
+            QuestManager->MarkQuestDone(EQuestStage::BrokenEngine);
+
+            TriggerSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        }
     }
 }
 
@@ -100,7 +104,7 @@ void AInteractEngine::FixEngine(ABasePlayer* Player)
 
     if (Player->GetQuestObject()->Tags[0] == FName("Tools"))
     {
-        //GameInstance->OnQuestComplite.Broadcast(EQuestStage::FixEngine);
+        // GameInstance->OnQuestComplite.Broadcast(EQuestStage::FixEngine);
         GameInstance->GetQuestManager()->MarkQuestDone(EQuestStage::FixEngine);
 
         Player->GetQuestObject()->DetachFromActor(FDetachmentTransformRules{EDetachmentRule::KeepWorld, false});

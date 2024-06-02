@@ -16,6 +16,8 @@ ASimulatorGameModeBase::ASimulatorGameModeBase()
 
 void ASimulatorGameModeBase::BeginPlay()
 {
+    Super::BeginPlay();
+
     const auto GameInstance = GetWorld()->GetGameInstanceChecked<USimulatorGameInstance>();
 
     if (GameInstance)

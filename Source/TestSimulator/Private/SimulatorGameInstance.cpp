@@ -12,7 +12,7 @@ void USimulatorGameInstance::OnStart()
 {
     Super::OnStart();
 
-    QuestManager = NewObject<UQuestManager>(GetWorld(), QuestManagerClass.Get());
+    QuestManager = NewObject<UQuestManager>(this, QuestManagerClass);
 
     OnConfirmMistake.AddUObject(QuestManager, &UQuestManager::OnConfirmMistake);
 }

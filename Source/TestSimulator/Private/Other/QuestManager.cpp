@@ -12,12 +12,12 @@ void UQuestManager::MarkQuestDone(EQuestStage Stage)
         return;
     }
 
-    if (Stage == CurrentQuest.QuestStage)
+    if (Stage == CurrentQuest->QuestStage)
     {
-        CurrentQuest.QuestStatus = EQuestStatus::Complited;
+        CurrentQuest->QuestStatus = EQuestStatus::Complited;
     }
 
-    if (CurrentQuest.QuestStatus != EQuestStatus::Complited)
+    if (CurrentQuest->QuestStatus != EQuestStatus::Complited)
     {
         return;
     }
@@ -28,7 +28,7 @@ void UQuestManager::MarkQuestDone(EQuestStage Stage)
         {
             Quest.QuestStatus = EQuestStatus::Active;
 
-            CurrentQuest = Quest;
+            CurrentQuest = &Quest;
 
             break;
         }
@@ -43,7 +43,7 @@ void UQuestManager::PostInitProperties()
 
     if (!QuestsData.IsEmpty())
     {
-        CurrentQuest = QuestsData[0];
+        CurrentQuest = &QuestsData[0];
     }
 }
 
@@ -54,7 +54,7 @@ void UQuestManager::OnConfirmMistake(EMistakeType Type)
 
 void UQuestManager::SetQuestText()
 {
-    if (CurrentQuest.QuestStage == EQuestStage::None)
+    if (CurrentQuest->QuestStage == EQuestStage::None)
     {
         return;
     }
@@ -73,7 +73,7 @@ void UQuestManager::SetQuestText()
         return;
     }
 
-    switch (CurrentQuest.QuestStage)
+    switch (CurrentQuest->QuestStage)
     {
     case EQuestStage::CardStage:
         HUD->SetQuestText(FString("Task: Take a card and open the door"));

@@ -55,7 +55,7 @@ void AInteractObject::Interact(ABasePlayer* Player)
 
         if (IsSameStage)
         {
-            //GameInstance->OnQuestComplite.Broadcast(this->InteractObjectData.ObjectStage);
+            // GameInstance->OnQuestComplite.Broadcast(this->InteractObjectData.ObjectStage);
 
             GameInstance->GetQuestManager().Get()->MarkQuestDone(InteractObjectData.ObjectStage);
 
@@ -64,15 +64,23 @@ void AInteractObject::Interact(ABasePlayer* Player)
                 StaticCast<AInteractDoor*>(InteractDoor.Get())->SetIsOpen(true);
             }
 
-            Player->GetQuestObject()->DetachFromActor(FDetachmentTransformRules{EDetachmentRule::KeepWorld,false});
-            Player->GetQuestObject().Get()->SetActorHiddenInGame(true);
-            Player->SetQuestObject(nullptr);
+            if (Player->GetQuestObject())
+            {
+                Player->GetQuestObject()->DetachFromActor(FDetachmentTransformRules{EDetachmentRule::KeepWorld, false});
+                Player->GetQuestObject().Get()->Destroy();
+                Player->SetQuestObject(nullptr);
+            }
         }
     }
     else
     {
-        GameInstance->GetQuestManager().Get()->MarkQuestDone(InteractObjectData.ObjectStage);
+        const auto QuestManager = GameInstance->GetQuestManager();
 
+        if (QuestManager)
+        {
+            QuestManager->MarkQuestDone(InteractObjectData.ObjectStage);
+        }
+       
         //GameInstance->OnQuestComplite.Broadcast(this->InteractObjectData.ObjectStage);
     }
 }
