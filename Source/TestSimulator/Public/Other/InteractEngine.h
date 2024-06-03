@@ -55,6 +55,7 @@ class TESTSIMULATOR_API AInteractEngine : public AActor,public IInteractive
     bool bIsFixed = false;
     bool bIsTurnOn = false;
 
+    UPROPERTY()
     TObjectPtr<UStaticMeshComponent> Detail;
 
     TWeakObjectPtr<class USimulatorGameInstance> GameInstance;

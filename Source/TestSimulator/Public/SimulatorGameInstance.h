@@ -38,5 +38,5 @@ class TESTSIMULATOR_API USimulatorGameInstance : public UGameInstance
 
   private:
     UPROPERTY()
-    UQuestManager* QuestManager;
+    TObjectPtr<UQuestManager> QuestManager;
 };

@@ -7,6 +7,7 @@
 #include "SimulatorPlayerController.h"
 #include "SimulatorHUD.h"
 #include "SimulatorGameInstance.h"
+#include "Other\QuestManager.h"
 
 ABasePlayer::ABasePlayer()
 {

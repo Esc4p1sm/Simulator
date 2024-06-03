@@ -57,6 +57,7 @@ class TESTSIMULATOR_API ABasePlayer : public ACharacter
   private:
     FHitResult LineHitResult;
 
+    UPROPERTY()
     TObjectPtr<AActor> QuestObject;
 
     TWeakObjectPtr<class ASimulatorHUD> GameHUD;

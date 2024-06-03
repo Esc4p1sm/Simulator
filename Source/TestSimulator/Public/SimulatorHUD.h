@@ -39,5 +39,6 @@ class TESTSIMULATOR_API ASimulatorHUD : public AHUD
     TSubclassOf<UUserWidget> EndPlayWidgetClass;
 
     private:
+    UPROPERTY()
     TObjectPtr<UUserWidget> CurrentWidget;
 };
